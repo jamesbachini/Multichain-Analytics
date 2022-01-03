@@ -1,0 +1,29 @@
+{
+  "name": "multichain-analytics",
+  "version": "1.0.0",
+  "description": "An analysis of cross chain swaps on Multichain.org",
+  "main": "multichain.js",
+  "type": "module",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesbachini/Multichain-Analytics.git"
+  },
+  "keywords": [
+    "multichain",
+    "anyswap",
+    "crosschain",
+    "analytics"
+  ],
+  "author": "James Bachini",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/jamesbachini/Multichain-Analytics/issues"
+  },
+  "homepage": "https://github.com/jamesbachini/Multichain-Analytics#readme",
+  "dependencies": {
+    "node-fetch": "^3.1.0"
+  }
+}
