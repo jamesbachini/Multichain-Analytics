@@ -4,16 +4,37 @@ const queryMultiswap = async () => {
   const multiswapAPI = 'https://bridgeapi.anyswap.exchange/v2/all/history/all/all/all/all?offset=0&limit=1000&status=10';
   const res = await fetch(multiswapAPI).catch(err => console.error(err));
   const json = await res.json().catch(err => console.error(err));
-  const networks = {};
-  const assets = {};
+  var networks_to = {};
+  var networks_from = {};
+  var assets = {};
   json.info.forEach((tx) => {
-    const networkName = networkLookup(tx.destChainID);
-    if (!networks[networkName]) networks[networkName] = 0;
-    networks[networkName] += 1;
+    if (!networks_from[networkLookup(tx.fromChainID)]) networks_from[networkLookup(tx.fromChainID)] = 0;
+    networks_from[networkLookup(tx.fromChainID)] += 1;
+    if (!networks_to[networkLookup(tx.toChainID)]) networks_to[networkLookup(tx.toChainID)] = 0;
+    networks_to[networkLookup(tx.toChainID)] += 1;
     if (!assets[tx.pairid]) assets[tx.pairid] = 0;
     assets[tx.pairid] += 1;
   });
-  console.log(networks);
+
+  const sortali = (dizio) => {
+    var items = Object.keys(dizio).map(
+      (key) => { return [key, dizio[key]] });
+    items.sort(
+      (first, second) => { return second[1] - first[1] }
+    );
+    const final = items.map(
+      (e) => { return e });
+    return final;
+  }
+  assets = sortali(assets);
+  networks_from = sortali(networks_from);
+  networks_to = sortali(networks_to);
+
+  console.log("Networks of origin")
+  console.log(networks_from);
+  console.log("Networks of destination")
+  console.log(networks_to);
+  console.log("Assets")
   console.log(assets);
 }
 
